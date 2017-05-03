@@ -32,4 +32,6 @@ win32:release{
 
 unix{
     LIBS += -lqwt -lanalogwidgets # Añadido Necesario para encontrar implementación de librerias (Linux)!!
+    LIBS += -lColorWidgets-qt5
+
 }

@@ -320,3 +320,27 @@ void GUIPanel::on_Knob_valueChanged(double value)
         if (size>0) serial.write((char *)pui8Frame,size);
     }
 }
+
+
+
+
+
+void GUIPanel::on_colorWheel_colorChanged(const QColor &arg1)
+{
+    PARAM_COMANDO_COLOR parametro;
+    uint8_t pui8Frame[MAX_FRAME_SIZE];
+    int size;
+    if(connected)
+    {
+        // Se rellenan los parametros del paquete (en este caso, el estado de los LED)
+        parametro.leds.fRed=arg1.red();
+        parametro.leds.fGreen=arg1.green();
+        parametro.leds.fBlue=arg1.blue();
+        // Se crea la trama con n de secuencia 0; comando COMANDO_LEDS; se le pasa la
+        // estructura de parametros, indicando su tamaño; el nº final es el tamaño maximo
+        // de trama
+        size=create_frame((uint8_t *)pui8Frame, COMANDO_COLOR, &parametro, sizeof(parametro), MAX_FRAME_SIZE);
+        // Se se pudo crear correctamente, se envia la trama
+        if (size>0) serial.write((char *)pui8Frame,size);
+    }
+}

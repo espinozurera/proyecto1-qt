@@ -50,6 +50,7 @@ typedef enum {
     COMANDO_PING,
     COMANDO_LEDS,
     COMANDO_BRILLO,
+    COMANDO_COLOR,
     COMANDO_BUTTONS,
 } commandTypes;
 
@@ -87,6 +88,15 @@ typedef union{
 typedef struct {
     float rIntensity;
 } PACKED PARAM_COMANDO_BRILLO;
+
+typedef union{
+    struct {
+                uint8_t fRed:1;
+                uint8_t fGreen:1;
+                uint8_t fBlue:1;
+    } PACKED leds;
+    uint8_t ui8Valor;
+} PACKED PARAM_COMANDO_COLOR;
 
 typedef union {
     struct {

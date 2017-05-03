@@ -36,6 +36,10 @@ private slots:
 
     void on_Knob_valueChanged(double value);
 
+    void on_colorWheel_colorChanged(const QColor &arg1);
+
+
+
 private: // funciones privadas
     void pingDevice();
     void startSlave();

@@ -344,3 +344,44 @@ void GUIPanel::on_colorWheel_colorChanged(const QColor &arg1)
         if (size>0) serial.write((char *)pui8Frame,size);
     }
 }
+
+void GUIPanel::on_modo_pwm_clicked(bool checked)
+{
+    if(checked==true){//es decir, cuando se pulsa para activar
+    ui->modo_gpio->click();
+    PARAM_COMANDO_MODO parametro;
+    uint8_t pui8Frame[MAX_FRAME_SIZE];
+    int size;
+        if(connected)
+    {
+            parametro.modo=0;//pwm
+            size=create_frame((uint8_t *)pui8Frame, COMANDO_CAMBIO_MODO, &parametro, sizeof(parametro), MAX_FRAME_SIZE);
+            // Se se pudo crear correctamente, se envia la trama
+            if (size>0) serial.write((char *)pui8Frame,size);
+        }
+     }
+}
+
+
+
+
+
+void GUIPanel::on_modo_gpio_clicked(bool checked)
+{
+    if(checked==true){//es decir, cuando se pulsa para activar
+    ui->modo_pwm->click();
+    PARAM_COMANDO_MODO parametro;
+    uint8_t pui8Frame[MAX_FRAME_SIZE];
+    int size;
+        if(connected)
+    {
+            parametro.modo=1;//gpio
+            size=create_frame((uint8_t *)pui8Frame, COMANDO_CAMBIO_MODO, &parametro, sizeof(parametro), MAX_FRAME_SIZE);
+            // Se se pudo crear correctamente, se envia la trama
+            if (size>0) serial.write((char *)pui8Frame,size);
+        }
+     }
+}
+
+
+

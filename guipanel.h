@@ -40,6 +40,10 @@ private slots:
 
 
 
+    void on_modo_pwm_clicked(bool checked);
+
+    void on_modo_gpio_clicked(bool checked);
+
 private: // funciones privadas
     void pingDevice();
     void startSlave();

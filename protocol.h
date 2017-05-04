@@ -51,6 +51,7 @@ typedef enum {
     COMANDO_LEDS,
     COMANDO_BRILLO,
     COMANDO_COLOR,
+    COMANDO_CAMBIO_MODO,
     COMANDO_BUTTONS,
 } commandTypes;
 
@@ -97,6 +98,10 @@ typedef union{
     } PACKED leds;
     uint8_t ui8Valor;
 } PACKED PARAM_COMANDO_COLOR;
+
+typedef struct {
+    bool modo;//0 para PWM, 1 para gpio.
+} PACKED PARAM_COMANDO_MODO;
 
 typedef union {
     struct {

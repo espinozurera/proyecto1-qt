@@ -106,12 +106,10 @@ void GUIPanel::readRequest()
                 {
                     PARAM_COMANDO_BUTTONS parametro;
                     extract_packet_command_param(pui8Frame,sizeof(parametro),&parametro);
-                    ui->rightButton->setChecked(parametro.button.fRight);
-                    ui->leftButton->setChecked(parametro.button.fLeft);
-                    if(parametro.ui8Buttons == 0)
-                        ui->led->setEnabled(false);
-                    else
-                        ui->led->setEnabled(true);
+
+                    ui->LED_right->setEnabled(parametro.button.fRight!=0);
+                    ui->LED_left->setEnabled(parametro.button.fLeft!=0);
+
                 }
                     break;
                 case COMANDO_NO_IMPLEMENTADO:
@@ -121,14 +119,14 @@ void GUIPanel::readRequest()
                     PARAM_COMANDO_NO_IMPLEMENTADO parametro;
                     extract_packet_command_param(pui8Frame,sizeof(parametro),&parametro);
                     // Muestra en una etiqueta (statuslabel) del GUI el mensaje
-                    ui->statusLabel->setText(tr("Status: Comando rechazado,"));
+                    ui->TextLabel->setText(tr("Status: Comando rechazado,"));
                 }
                     break;
 
                     //Falta por implementar la recepcion de mas tipos de comando
 
                 default:
-                    ui->statusLabel->setText(tr("Status: Recibido paquete inesperado,"));
+                    ui->TextLabel->setText(tr("Status: Recibido paquete inesperado,"));
                     break;
                 }
             }
@@ -136,7 +134,7 @@ void GUIPanel::readRequest()
         else
         {
             // B. La trama no está completa... no lo procesa, y de momento no digo nada
-            ui->statusLabel->setText(tr("Status:Fallo trozo paquete recibido"));
+            ui->TextLabel->setText(tr("Status:Fallo trozo paquete recibido"));
         }
         request.remove(0,posicion+1); // Se elimina todo el trozo de información erroneo del array de bytes
         posicion=request.indexOf((char)STOP_FRAME_CHAR,0); // Y se busca el byte de fin de la siguiente trama
@@ -197,7 +195,7 @@ void GUIPanel::startSlave()
     ui->runButton->setEnabled(false);
 
     // Se indica que se ha realizado la conexión en la etiqueta 'statusLabel'
-    ui->statusLabel->setText(tr("Ejecucion, conectado al puerto %1.")
+    ui->TextLabel->setText(tr("Ejecucion, conectado al puerto %1.")
                              .arg(ui->serialPortComboBox->currentText()));
 
     // Y se habilitan los controles
@@ -213,7 +211,7 @@ void GUIPanel::processError(const QString &s)
 {
     activateRunButton(); // Activa el botón RUN
     // Muestra en la etiqueta de estado la razón del error (notese la forma de pasar argumentos a la cadena de texto)
-    ui->statusLabel->setText(tr("Status: Not running, %1.").arg(s));
+    ui->TextLabel->setText(tr("Status: Not running, %1.").arg(s));
 }
 
 // Funcion de habilitacion del boton de inicio/conexion
@@ -300,7 +298,7 @@ void GUIPanel::cambiaLEDs(void){
 
 void GUIPanel::on_pushButton_clicked()
 {
-    ui->statusLabel->setText(tr(""));
+    ui->TextLabel->setText(tr(""));
 }
 
 void GUIPanel::on_Knob_valueChanged(double value)
@@ -383,5 +381,42 @@ void GUIPanel::on_modo_gpio_clicked(bool checked)
      }
 }
 
+
+
+
+
+
+void GUIPanel::on_pushButton_2_clicked()
+{
+    PARAM_COMANDO_SONDEO parametro;
+    uint8_t pui8Frame[MAX_FRAME_SIZE];
+    int size;
+        if(connected)
+    {
+            parametro.sondeo=1;
+            size=create_frame((uint8_t *)pui8Frame, COMANDO_SONDEO, &parametro, sizeof(parametro), MAX_FRAME_SIZE);
+            // Se se pudo crear correctamente, se envia la trama
+            if (size>0) serial.write((char *)pui8Frame,size);
+        }
+
+
+
+}
+
+
+void GUIPanel::on_checkBox_toggled(bool checked)//check de sondeo
+{
+    PARAM_COMANDO_SONDEO parametro;
+    uint8_t pui8Frame[MAX_FRAME_SIZE];
+    int size;
+        if(connected)
+    {
+            parametro.sondeo=checked;
+            size=create_frame((uint8_t *)pui8Frame, COMANDO_MODO_SONDEO, &parametro, sizeof(parametro), MAX_FRAME_SIZE);
+            // Se se pudo crear correctamente, se envia la trama
+            if (size>0) serial.write((char *)pui8Frame,size);
+        }
+
+}
 
 

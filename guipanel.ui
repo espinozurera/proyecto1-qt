@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>528</width>
-    <height>321</height>
+    <width>739</width>
+    <height>454</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -37,19 +37,6 @@
    </property>
    <property name="text">
     <string>Ping</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="statusLabel">
-   <property name="geometry">
-    <rect>
-     <x>82</x>
-     <y>182</y>
-     <width>331</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Detenido</string>
    </property>
   </widget>
   <widget class="QSplitter" name="splitter">
@@ -134,52 +121,14 @@
     <UInt>10</UInt>
    </property>
   </widget>
-  <widget class="QRadioButton" name="rightButton">
-   <property name="geometry">
-    <rect>
-     <x>246</x>
-     <y>134</y>
-     <width>117</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Right</string>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoExclusive">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QRadioButton" name="leftButton">
-   <property name="geometry">
-    <rect>
-     <x>246</x>
-     <y>166</y>
-     <width>117</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Left</string>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="autoExclusive">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="Led" name="led">
+  <widget class="Led" name="LED_left">
    <property name="enabled">
     <bool>false</bool>
    </property>
    <property name="geometry">
     <rect>
-     <x>320</x>
-     <y>150</y>
+     <x>490</x>
+     <y>170</y>
      <width>16</width>
      <height>16</height>
     </rect>
@@ -239,6 +188,83 @@
     <string>GPIO</string>
    </property>
   </widget>
+  <widget class="Led" name="LED_right">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>150</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>Color Led component</string>
+   </property>
+   <property name="whatsThis">
+    <string>Led indicator</string>
+   </property>
+  </widget>
+  <widget class="QTextBrowser" name="textBrowser">
+   <property name="geometry">
+    <rect>
+     <x>520</x>
+     <y>100</y>
+     <width>111</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="html">
+    <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Cantarell'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Sondeo de pulsadores:&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;-Right&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;-Left&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_2">
+   <property name="geometry">
+    <rect>
+     <x>390</x>
+     <y>160</y>
+     <width>85</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>SONDEO</string>
+   </property>
+  </widget>
+  <widget class="QwtTextLabel" name="TextLabel">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>180</y>
+     <width>261</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="checkBox">
+   <property name="geometry">
+    <rect>
+     <x>380</x>
+     <y>90</y>
+     <width>111</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>sondeo on/off</string>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+  </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
@@ -256,6 +282,11 @@
    <class>QwtKnob</class>
    <extends>QWidget</extends>
    <header>qwt_knob.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QwtTextLabel</class>
+   <extends>QFrame</extends>
+   <header>qwt_text_label.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

@@ -52,6 +52,8 @@ typedef enum {
     COMANDO_BRILLO,
     COMANDO_COLOR,
     COMANDO_CAMBIO_MODO,
+    COMANDO_SONDEO,
+    COMANDO_MODO_SONDEO,
     COMANDO_BUTTONS,
 } commandTypes;
 
@@ -102,6 +104,11 @@ typedef union{
 typedef struct {
     bool modo;//0 para PWM, 1 para gpio.
 } PACKED PARAM_COMANDO_MODO;
+
+typedef struct {
+    bool sondeo;//se manda a 1 para sondear el valor de los SW1 y SW2
+} PACKED PARAM_COMANDO_SONDEO;
+
 
 typedef union {
     struct {

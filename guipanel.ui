@@ -226,7 +226,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;-Left&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="Sondeo_leds">
    <property name="geometry">
     <rect>
      <x>390</x>
@@ -253,7 +253,7 @@ p, li { white-space: pre-wrap; }
    <property name="geometry">
     <rect>
      <x>380</x>
-     <y>90</y>
+     <y>110</y>
      <width>111</width>
      <height>27</height>
     </rect>
@@ -262,7 +262,43 @@ p, li { white-space: pre-wrap; }
     <string>sondeo on/off</string>
    </property>
    <property name="checked">
-    <bool>true</bool>
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QLCDNumber" name="lcdNumber">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>360</y>
+     <width>64</width>
+     <height>23</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>330</y>
+     <width>111</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Temperatura Cº</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="Sondeo_temp">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>360</y>
+     <width>85</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>SONDEO</string>
    </property>
   </widget>
  </widget>

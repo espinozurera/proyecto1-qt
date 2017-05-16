@@ -1,5 +1,6 @@
 #include "guipanel.h"
 #include "ui_guipanel.h"
+#include "string.h"
 #include <QSerialPort>      // Comunicacion por el puerto serie
 #include <QSerialPortInfo>  // Comunicacion por el puerto serie
 #include <QMessageBox>      // Se deben incluir cabeceras a los componentes que se vayan a crear en la clase
@@ -102,6 +103,16 @@ void GUIPanel::readRequest()
                     //statusLabel->setText(tr("  RESPUESTA A PING RECIBIDA"));
                     pingResponseReceived();
                     break;
+
+                case COMANDO_TEMP:
+                {
+                    PARAM_COMANDO_TEMP parametro;
+                    extract_packet_command_param(pui8Frame,sizeof(parametro),&parametro);
+                    int a=parametro.temp;
+                    ui->lcdNumber->display(a);
+                }
+                    break;
+
                 case COMANDO_BUTTONS:
                 {
                     PARAM_COMANDO_BUTTONS parametro;
@@ -386,22 +397,7 @@ void GUIPanel::on_modo_gpio_clicked(bool checked)
 
 
 
-void GUIPanel::on_pushButton_2_clicked()
-{
-    PARAM_COMANDO_SONDEO parametro;
-    uint8_t pui8Frame[MAX_FRAME_SIZE];
-    int size;
-        if(connected)
-    {
-            parametro.sondeo=1;
-            size=create_frame((uint8_t *)pui8Frame, COMANDO_SONDEO, &parametro, sizeof(parametro), MAX_FRAME_SIZE);
-            // Se se pudo crear correctamente, se envia la trama
-            if (size>0) serial.write((char *)pui8Frame,size);
-        }
 
-
-
-}
 
 
 void GUIPanel::on_checkBox_toggled(bool checked)//check de sondeo
@@ -420,3 +416,36 @@ void GUIPanel::on_checkBox_toggled(bool checked)//check de sondeo
 }
 
 
+
+void GUIPanel::on_Sondeo_temp_clicked()
+{
+    PARAM_COMANDO_TEMP parametro;
+
+    uint8_t pui8Frame[MAX_FRAME_SIZE];
+    int size;
+    if(connected)
+{
+        parametro.temp=1;
+        size=create_frame((uint8_t *)pui8Frame, COMANDO_TEMP, &parametro, sizeof(parametro), MAX_FRAME_SIZE);
+        // Se se pudo crear correctamente, se envia la trama
+        if (size>0) serial.write((char *)pui8Frame,size);
+    }
+}
+
+
+void GUIPanel::on_Sondeo_leds_clicked()
+{
+    PARAM_COMANDO_SONDEO parametro;
+    uint8_t pui8Frame[MAX_FRAME_SIZE];
+    int size;
+        if(connected)
+    {
+            parametro.sondeo=1;
+            size=create_frame((uint8_t *)pui8Frame, COMANDO_SONDEO, &parametro, sizeof(parametro), MAX_FRAME_SIZE);
+            // Se se pudo crear correctamente, se envia la trama
+            if (size>0) serial.write((char *)pui8Frame,size);
+        }
+
+
+
+}

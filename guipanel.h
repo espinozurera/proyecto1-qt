@@ -48,6 +48,10 @@ private slots:
 
     void on_checkBox_toggled(bool checked);
 
+    void on_Sondeo_temp_clicked();
+
+    void on_Sondeo_leds_clicked();
+
 private: // funciones privadas
     void pingDevice();
     void startSlave();

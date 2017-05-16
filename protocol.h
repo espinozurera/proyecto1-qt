@@ -54,6 +54,7 @@ typedef enum {
     COMANDO_CAMBIO_MODO,
     COMANDO_SONDEO,
     COMANDO_MODO_SONDEO,
+    COMANDO_TEMP,
     COMANDO_BUTTONS,
 } commandTypes;
 
@@ -108,6 +109,10 @@ typedef struct {
 typedef struct {
     bool sondeo;//se manda a 1 para sondear el valor de los SW1 y SW2
 } PACKED PARAM_COMANDO_SONDEO;
+
+typedef struct {
+    uint32_t temp;//se recibe el sondeo y se manda la temp
+} PACKED PARAM_COMANDO_TEMP;
 
 
 typedef union {
